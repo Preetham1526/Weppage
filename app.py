@@ -19,7 +19,6 @@ app.secret_key = "secret"
 app.config["MONGO_URI"] = "mongodb://localhost:27017/subscriptions"
 mongo = PyMongo(app)
 
-
 # ---------- Utility: Email OTP ----------
 def send_email(to, subject, content):
     msg = MIMEText(content)
