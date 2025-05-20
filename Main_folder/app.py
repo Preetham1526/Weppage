@@ -19,43 +19,6 @@ app.secret_key = "secret"
 app.config["MONGO_URI"] = "mongodb://localhost:27017/subscriptions"
 mongo = PyMongo(app)
 
-# ---------- SQLite Tables ----------
-def init_sqlite_db():
-    with sqlite3.connect('database.db') as conn:
-        c = conn.cursor()
-        c.execute('''CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT,
-            email TEXT UNIQUE,
-            phone TEXT,
-            country TEXT,
-            state TEXT,
-            password TEXT
-        )''')
-        c.execute('''CREATE TABLE IF NOT EXISTS otp_tokens (
-            email TEXT PRIMARY KEY,
-            otp TEXT,
-            created_at DATETIME
-        )''')
-        c.execute('''CREATE TABLE IF NOT EXISTS careers (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_email TEXT,
-            title TEXT,
-            skills TEXT,
-            experience TEXT,
-            approved BOOLEAN DEFAULT 0
-        )''')
-        c.execute('''CREATE TABLE IF NOT EXISTS discussions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_email TEXT,
-            title TEXT,
-            message TEXT,
-            parent_id INTEGER,
-            created_at TEXT
-        )''')
-        conn.commit()
-
-init_sqlite_db()
 
 # ---------- Utility: Email OTP ----------
 def send_email(to, subject, content):
