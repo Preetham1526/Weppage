@@ -1,0 +1,225 @@
+/* neon-theme.css */
+body {
+  font-family: "Poppins", sans-serif;
+  background: #0f0f0f;
+  color: #fff;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* Reset some defaults */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #0c0c0c;
+  color: #ffffff;
+}
+
+/* Top Navbar */
+.top-navbar {
+  width: 100%;
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  padding: 15px 20px;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  display: relative;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #00fff7;
+  text-shadow: 0 0 5px #00fff7, 0 0 10px #00fff7;
+}
+
+.nav-links a {
+  color: #ffffffcc;
+  text-decoration: none;
+  font-weight: 500;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.nav-links a:hover {
+  color: #00fff7;
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 5px #00fff7, 0 0 10px #00fff7;
+}
+
+.nav-actions .btn {
+  background-color: transparent;
+  color: #00fff7;
+  border: 1px solid #00fff7;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-left: 10px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.nav-actions .btn:hover {
+  background-color: #00fff7;
+  color: #000;
+  box-shadow: 0 0 10px #00fff7;
+}
+
+/* Push main content below navbar */
+.main-content {
+  margin-top: 100px;
+  padding: 20px;
+}
+
+/* Footer Styling */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  color: #aaa;
+  font-size: 0.9rem;
+  border-top: 1px solid #222;
+  margin-top: 40px;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.logout_btn {
+  position: absolute;
+  top: 20px;
+  left: 80%;
+  font-size: 18px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+.logout_btn:hover {
+  color: red;
+  background: rgba(0, 255, 200, 0.1);
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.3);
+  transform: scale(1.05);
+}
+.home-link {
+  position: absolute;
+  right: 4%;
+  top: 20px;
+  left: 88%;
+  font-size: 18px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.home-link:hover {
+  color: #00ffee;
+  background: rgba(0, 255, 200, 0.1);
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.3);
+  transform: scale(1.05);
+}
+.container,
+.insurance_links {
+  display: flex;
+}
+.container {
+  width: 30%;
+}
+.conversation {
+  top: 40px;
+}
+.container,
+.insurance_links {
+  background: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffe7;
+}
+
+button,
+input[type="submit"],
+.floating-button {
+  background: #00ffe7;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-weight: bold;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: #00ccbe;
+  box-shadow: 0 0 15px #00ffe7;
+}
+
+.btn-neon {
+  background: transparent;
+  position: absolute;
+  top: 20px;
+  left: 90%;
+  border: 2px solid #00ffe7;
+  color: #00ffe7;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-shadow: 0 0 5px #00ffe7;
+  transition: all 0.3s;
+}
+
+.btn-neon:hover {
+  background: #00ffe7;
+  color: #000;
+  box-shadow: 0 0 10px #00ffe7;
+}
+
+input,
+textarea {
+  background: #0f0f0f;
+  color: #00ffe7;
+  border: 1px solid #00ffe7;
+  padding: 8px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+textarea {
+  width: 100%;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #80ffff;
+}
+.site-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 10px;
+  background-color: #1a1a1a;
+  color: #0fffc1;
+}

@@ -1,0 +1,240 @@
+/* neon-theme.css */
+body {
+  font-family: "Poppins", sans-serif;
+  background: #0f0f0f;
+  color: #fff;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* Reset some defaults */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #0c0c0c;
+  color: #ffffff;
+}
+
+/* Top Navbar */
+.top-navbar {
+  width: 100%;
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  padding: 15px 20px;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  display: relative;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #00fff7;
+  text-shadow: 0 0 5px #00fff7, 0 0 10px #00fff7;
+}
+
+.nav-links a {
+  color: #ffffffcc;
+  text-decoration: none;
+  font-weight: 500;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.nav-links a:hover {
+  color: #00fff7;
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 5px #00fff7, 0 0 10px #00fff7;
+}
+
+.nav-actions .btn {
+  background-color: transparent;
+  color: #00fff7;
+  border: 1px solid #00fff7;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-left: 10px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.nav-actions .btn:hover {
+  background-color: #00fff7;
+  color: #000;
+  box-shadow: 0 0 10px #00fff7;
+}
+
+/* Push main content below navbar */
+.main-content {
+  margin-top: 100px;
+  padding: 20px;
+}
+
+/* Footer Styling */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  color: #aaa;
+  font-size: 0.9rem;
+  border-top: 1px solid #222;
+  margin-top: 40px;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.logout_btn {
+  position: absolute;
+  top: 20px;
+  left: 80%;
+  font-size: 18px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+.logout_btn:hover {
+  color: red;
+  background: rgba(0, 255, 200, 0.1);
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.3);
+  transform: scale(1.05);
+}
+.home-link {
+  position: absolute;
+  right: 4%;
+  top: 20px;
+  left: 88%;
+  font-size: 18px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.home-link:hover {
+  color: #00ffee;
+  background: rgba(0, 255, 200, 0.1);
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.3);
+  transform: scale(1.05);
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+  color: #ccc;
+  backdrop-filter: blur(10px);
+}
+
+/* Center Card Style for Contact Form */
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding-bottom: 20px;
+  margin-top: 120px; /* Push below navbar */
+}
+.row {
+  padding-bottom: 20px;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Input & Textarea */
+form input,
+form textarea {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s ease;
+  width: 100%;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #00fff7;
+  box-shadow: 0 0 10px #00fff7;
+}
+
+/* Name Fields in a Row */
+.name_contact {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+/* Make all input rows stack on mobile */
+@media (max-width: 768px) {
+  .name_contact {
+    flex-direction: column;
+  }
+}
+
+/* Submit Button */
+form button[type="submit"] {
+  background-color: #00fff7;
+  color: #000;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: #00e6d2;
+  box-shadow: 0 0 10px #00fff7;
+}
+
+/* Textarea placeholder styling */
+textarea::placeholder {
+  color: #80ffff;
+}

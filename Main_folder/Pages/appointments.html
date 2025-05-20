@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointments</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Pages/Pagescss/appointment.css" />
+    <link rel="stylesheet" href="../Pages/Pagescss/topnavbar.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Top Horizontal Navbar -->
+    <header class="top-navbar">
+      <h1 class="text-center mb-5">
+        Welcome <span id="username-display"></span>
+      </h1>
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center px-4"
+      >
+        <nav class="nav-links d-flex gap-4">
+          <a href="subscription.html"
+            ><i class="fas fa-shield-alt"></i> Subscription</a
+          >
+          <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+          <a href="discussions.html"
+            ><i class="fas fa-comments"></i> Discussions</a
+          >
+          <a href="insurance.html"
+            ><i class="fas fa-shield-heart"></i> Insurance</a
+          >
+          <a href="Careers.html"><i class="fas fa-briefcase"></i> Careers</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="../templates/home.html" class="home-link">← Home</a>
+          <button class="logout_btn" id="logoutBtn" onclick="logout()">
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content container mt-5 pt-5">
+      <div class="appointment-container">
+        <h2>Book Appointment</h2>
+        <div id="error-message" class="error-message"></div>
+        <form id="appointment-form">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required />
+
+          <label for="time">Time:</label>
+          <input type="time" id="time" name="time" required />
+
+          <label for="service">Service:</label>
+          <select id="service" name="service" required>
+            <option value="">Select Service</option>
+            <option value="service1">Service 1</option>
+            <option value="service2">Service 2</option>
+            <option value="service3">Service 3</option>
+          </select>
+
+          <div class="comment-form">
+            <h3>Comments:</h3>
+            <textarea
+              id="appointmentComments"
+              placeholder="Add comments..."
+            ></textarea>
+          </div>
+
+          <input type="submit" value="Book Appointment" />
+        </form>
+      </div>
+
+      <div class="appointment-list mt-5">
+        <h2>Your Appointments</h2>
+        <ul id="appointments-list"></ul>
+      </div>
+    </main>
+
+    <footer class="site-footer mt-5">
+      &copy; 2025 Preetham's Dashboard. All rights reserved.
+    </footer>
+
+    <script>
+      function logout() {
+        alert("Logged out successfully!");
+      }
+    </script>
+  </body>
+</html>

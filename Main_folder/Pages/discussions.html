@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Appointment Details</title>
+    <link rel="stylesheet" href="Pagescss/discussion.css" />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="appointment-details">
+      <h2>Appointment Details</h2>
+      <div id="appointmentInfo"></div>
+
+      <div class="rating">
+        <h3>Rate Appointment:</h3>
+        <label><input type="radio" name="rating" value="1" /> 1 Star</label>
+        <label><input type="radio" name="rating" value="2" /> 2 Stars</label>
+        <label><input type="radio" name="rating" value="3" /> 3 Stars</label>
+        <label><input type="radio" name="rating" value="4" /> 4 Stars</label>
+        <label><input type="radio" name="rating" value="5" /> 5 Stars</label>
+        <button onclick="rateAppointment()">Submit Rating</button>
+        <div id="ratingMessage"></div>
+      </div>
+      <div class="filter-date">
+        <h3>Filter Finished Appointments by Date:</h3>
+        <input type="date" id="filterDateInput">
+        <button onclick="filterFinishedAppointments()">Filter</button>
+        <ul id="filteredAppointmentsList"></ul>
+      </div>
+
+      <div class="comments">
+        <h3>Comments:</h3>
+        <ul id="commentList"></ul>
+        <div class="comment-form">
+          <textarea id="commentText" placeholder="Add a comment..."></textarea>
+          <button onclick="addComment()">Add Comment</button>
+          <div id="commentMessage"></div>
+        </div>
+        <div class="discussion-container">
+          <h2>Discussions</h2>
+      
+        <div class="appointments-section">
+          <button id="upcomingAppointmentsButton">Upcoming Appointments</button>
+          <button id="finishedAppointmentsButton">Finished Appointments</button>
+          <div class="appointments-list" id="upcomingAppointmentsList"></div>
+          <div class="appointments-list" id="finishedAppointmentsList"></div>
+        </div>
+
+      <a href="../templates/home.html" class="home-icon" title="Go to Home">
+        <i class="fas fa-home"></i> Home
+      </a>
+    </div>
+    <footer class="site-footer">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </footer>
+    <script>
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      if (!loggedInUser) {
+        window.location.href = '../login/login.html';
+        }
+        const appointmentIndex = localStorage.getItem('selectedAppointmentIndex');
+      if (appointmentIndex === null) {
+      document.getElementById('appointmentInfo').textContent = 'Please select an appointment to view details and rate.';
+      document.querySelector('.rating button').disabled = true; // Disable rating button
+      }     
+      else {
+      const appointments = JSON.parse(localStorage.getItem('appointments')) || {};
+      const userAppointments = appointments[loggedInUser] || [];
+      const appointment = userAppointments[appointmentIndex];
+
+    if (appointment) {
+        document.getElementById('appointmentInfo').innerHTML = `
+            <p>Date: ${appointment.date}</p>
+            <p>Time: ${appointment.time}</p>
+            <p>Service: ${appointment.service}</p>
+        `;
+        displayComments();
+    } else {
+        document.getElementById('appointmentInfo').textContent = 'Appointment details not found.';
+        document.querySelector('.rating button').disabled = true; // Disable rating button
+    }
+}
+function displayUpcomingAppointments() {
+    upcomingList.innerHTML = '';
+
+    const appointments = JSON.parse(localStorage.getItem('appointments')) || {};
+    const userAppointments = appointments[loggedInUser] || [];
+    const currentDate = new Date();
+
+    userAppointments.forEach((appointment, index) => {
+        const appointmentDate = new Date(appointment.date + 'T' + appointment.time);
+        if (appointmentDate > currentDate) {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                Date: ${appointment.date}, Time: ${appointment.time}, Service: ${appointment.service}
+                <button onclick="selectUpcomingAppointment(${index})">Select</button>
+            `;
+            upcomingList.appendChild(li);
+        }
+    });
+}
+function filterFinishedAppointments() {
+    const filterDate = document.getElementById('filterDateInput').value;
+    const filteredAppointmentsList = document.getElementById('filteredAppointmentsList');
+    filteredAppointmentsList.innerHTML = '';
+
+    if (!filterDate) return;
+
+    const appointments = JSON.parse(localStorage.getItem('appointments')) || {};
+    const userAppointments = appointments[loggedInUser] || [];
+
+    userAppointments.forEach(appointment => {
+        if (appointment.date === filterDate) {
+            const li = document.createElement('li');
+            li.textContent = `Date: ${appointment.date}, Time: ${appointment.time}, Service: ${appointment.service}`;
+            filteredAppointmentsList.appendChild(li);
+        }
+    });
+}
+
+function viewAppointmentDiscussion(appointmentIndex) {
+  localStorage.setItem('selectedAppointmentDiscussionIndex', appointmentIndex);
+  window.location.href = '../Appointment_folder/appointment.html';
+}
+
+function displayDiscussionComments() {
+    const discussionCommentsList = document.getElementById('discussionCommentsList');
+    discussionCommentsList.innerHTML = '';
+
+    const comments = JSON.parse(localStorage.getItem('discussionComments')) || {};
+    const discussionComments = comments[loggedInUser] || [];
+
+    discussionComments.forEach(comment => {
+        const li = document.createElement('li');
+        li.textContent = comment;
+        discussionCommentsList.appendChild(li);
+    });
+}
+
+function addDiscussionComment() {
+    const commentText = document.getElementById('discussionCommentText').value;
+    if (!commentText) return;
+
+    let comments = JSON.parse(localStorage.getItem('discussionComments')) || {};
+    if (!comments[loggedInUser]) comments[loggedInUser] = [];
+
+    comments[loggedInUser].push(commentText);
+    localStorage.setItem('discussionComments', JSON.stringify(comments));
+
+    document.getElementById('discussionCommentText').value = '';
+    displayDiscussionComments();
+}
+
+displayFinishedAppointments();
+displayDiscussionComments();
+    </script>
+  </body>
+</html>

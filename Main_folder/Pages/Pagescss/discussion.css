@@ -1,0 +1,86 @@
+body {
+  font-family: sans-serif;
+}
+.appointment-details {
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+}
+.comments {
+  margin-top: 20px;
+}
+.comment-form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.rating {
+  margin-top: 10px;
+}
+.rating label {
+  margin-right: 5px;
+} /* Home Button */
+.home-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #212529;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+.home-icon:hover {
+  background: #343a40;
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 20px 0;
+  background: #f0f0f0;
+  color: #555;
+}
+
+.sidebar {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #34495e;
+  width: 250px;
+  min-width: 250px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-home {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.btn-home:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+.container {
+  margin-left: 220px;
+}
+
+.site-footer a {
+  margin: 0 10px;
+  color: #007bff;
+  text-decoration: none;
+}

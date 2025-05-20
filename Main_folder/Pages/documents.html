@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documents</title>
+    <link rel="stylesheet" href="Pagescss/documents.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Documents</h1>
+
+    <!-- Upload Form -->
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <label for="file">Upload File:</label>
+      <input type="file" id="file" name="file" required />
+      <button type="submit">Upload</button>
+    </form>
+
+    <!-- Uploaded Files Section -->
+    <h2>Uploaded Files</h2>
+    <ul id="file-list">
+      <!-- File list will be dynamically rendered here -->
+    </ul>
+
+    <!-- Home Icon Link -->
+    <a href="../templates/home.html" class="home-icon" title="Go to Home">
+      <a href= class="home-icon" title="Go to Home">
+      <i class="fas fa-home"></i> Home
+    </a>
+    <footer class="site-footer">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </footer>
+
+    <script>
+      async function fetchFiles() {
+        try {
+          const response = await fetch("/files");
+          const files = await response.json();
+          const fileList = document.getElementById("file-list");
+
+          fileList.innerHTML = "";
+          files.forEach((file) => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <a href="/download/${file}" download>${file}</a> |
+              <a href="/preview/${file}" target="_blank">Preview</a>
+            `;
+            fileList.appendChild(li);
+          });
+        } catch (error) {
+          console.error("Error fetching files:", error);
+        }
+      }
+
+      fetchFiles();
+    </script>
+  </body>
+</html>

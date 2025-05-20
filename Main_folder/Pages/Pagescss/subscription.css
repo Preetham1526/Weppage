@@ -1,0 +1,250 @@
+/* subscription.css */
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #0d0d0d;
+  color: #f0f0f0;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* Reset some defaults */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #0c0c0c;
+  color: #ffffff;
+}
+
+/* Top Navbar */
+.top-navbar {
+  width: 100%;
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  padding: 15px 20px;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  display: relative;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #00fff7;
+  text-shadow: 0 0 5px #00fff7, 0 0 10px #00fff7;
+}
+
+.nav-links a {
+  color: #ffffffcc;
+  text-decoration: none;
+  font-weight: 500;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.nav-links a:hover {
+  color: #00fff7;
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 5px #00fff7, 0 0 10px #00fff7;
+}
+
+.nav-actions .btn {
+  background-color: transparent;
+  color: #00fff7;
+  border: 1px solid #00fff7;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-left: 10px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.nav-actions .btn:hover {
+  background-color: #00fff7;
+  color: #000;
+  box-shadow: 0 0 10px #00fff7;
+}
+
+/* Push main content below navbar */
+.main-content {
+  margin-top: 100px;
+  padding: 20px;
+}
+
+/* Footer Styling */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  color: #aaa;
+  font-size: 0.9rem;
+  border-top: 1px solid #222;
+  margin-top: 40px;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.logout_btn {
+  position: absolute;
+  top: 20px;
+  left: 80%;
+  font-size: 18px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+.logout_btn:hover {
+  color: red;
+  background: rgba(0, 255, 200, 0.1);
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.3);
+  transform: scale(1.05);
+}
+.home-link {
+  position: absolute;
+  right: 4%;
+  top: 20px;
+  left: 88%;
+  font-size: 18px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+.btn {
+  margin: auto;
+}
+.btn:hover {
+  background-color: #00ffae;
+}
+.home-link:hover {
+  color: #00ffee;
+  background: rgba(0, 255, 200, 0.1);
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.3);
+  transform: scale(1.05);
+}
+.container {
+  padding: 2rem;
+  overflow-y: auto;
+}
+.row {
+  padding-top: 125px;
+}
+
+.card {
+  background-color: #1a1a1a;
+  border: 1px solid #00ffe1;
+  box-shadow: 0 0 10px #00ffe1;
+  border-radius: 10px;
+}
+.card {
+  margin-top: 1rem;
+  /* Adds space around each card */
+}
+.card h3 {
+  color: #00ffe1;
+  margin-bottom: 1rem;
+}
+
+.input-group .form-control {
+  background-color: #000;
+  border: 1px solid #00ffe1;
+  color: #fff;
+}
+
+.input-group .btn-primary {
+  background-color: #00ffe1;
+  border: none;
+  color: #000;
+  font-weight: 600;
+}
+
+.plan-card {
+  background-color: #1f1f1f;
+  border: 1px solid #00ffe1;
+  border-radius: 12px;
+  box-shadow: 0 0 8px #00ffe1;
+  padding: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.plan-card:hover {
+  transform: scale(1.03);
+}
+
+.plan-header h4 {
+  color: #00ffe1;
+  text-shadow: 0 0 5px #00ffe1;
+  margin-bottom: 1rem;
+}
+
+.plan-features {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.plan-features li {
+  padding: 0.3rem 0;
+  color: #fff;
+}
+
+.plan-price h5 {
+  color: #00ffe1;
+}
+
+.btn-outline-primary {
+  border-color: #00ffe1;
+  color: #00ffe1;
+}
+
+.btn-outline-primary:hover {
+  background-color: #00ffe1;
+  color: #000;
+}
+
+.form-select {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #00ffe1;
+}
+
+.btn-success {
+  background-color: #00ffe1;
+  border: none;
+  color: #000;
+  font-weight: 600;
+}
+
+#checkoutResult,
+#couponResult {
+  color: #00ffae;
+  white-space: pre-line;
+}

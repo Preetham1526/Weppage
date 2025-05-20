@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insurance Options</title>
+    <link rel="stylesheet" href="Pagescss/insurance.css" />
+    
+ 
+  
+
+  </head>
+<body class="bg-light">
+  <h1>Explore Our Insurance Options</h1>
+  <header class="top-navbar">
+    <h1 class="text-center mb-5">
+      Welcome <span id="username-display"></span>
+    </h1>
+    <div
+      class="container-fluid d-flex justify-content-between align-items-center px-4"
+    >
+      <nav class="nav-links d-flex gap-4">
+        <a href="subscription.html"
+          ><i class="fas fa-shield-alt"></i> Subscription</a
+        >
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="discussions.html"
+          ><i class="fas fa-comments"></i> Discussions</a
+        >
+        <a href="insurance.html"
+          ><i class="fas fa-shield-heart"></i> Insurance</a
+        >
+        <a href="Careers.html"><i class="fas fa-briefcase"></i> Careers</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="../templates/home.html" class="home-link">← Home</a>
+        <button class="logout_btn" id="logoutBtn" onclick="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+    <h2>Explore Our Insurance Options</h2>
+  </header>
+  
+<div class="main-content">
+        
+    <div class="insurance-card">
+      <h2>Medical Insurance</h2>
+      <p>
+        Protect your health and well-being with our comprehensive medical
+        insurance plans. We offer a variety of options to suit your needs and
+        budget, including coverage for doctor visits, hospital stays, and
+        prescription medications.
+      </p>
+      <button onclick="showMedicalPlans()">View Medical Plans</button>
+    </div>
+
+    <div class="insurance-card">
+      <h2>Automobile Insurance</h2>
+      <p>
+        Drive with confidence knowing you're protected with our automobile
+        insurance. We provide coverage for liability, collision, and
+        comprehensive damage, ensuring you're safe on the road.
+      </p>
+      <button onclick="showAutoPlans()">View Auto Plans</button>
+    </div>
+
+    <div class="insurance-card">
+      <h2>Home Insurance</h2>
+      <p>
+        Safeguard your home and belongings with our reliable home insurance
+        policies. We offer coverage for damage caused by fire, theft, natural
+        disasters, and more, giving you peace of mind.
+      </p>
+      <button onclick="showHomePlans()">View Home Plans</button>
+    </div>
+
+    <div class="insurance-card">
+      <h2>Pet Insurance</h2>
+      <p>
+        Ensure your furry friends receive the best care with our pet insurance.
+        We cover veterinary expenses, including surgeries, treatments, and
+        medications, so you can focus on their well-being.
+      </p>
+      <button onclick="showPetPlans()">View Pet Plans</button>
+    </div>
+    <footer class="site-footer mt-5">
+      &copy; 2025 Preetham's Dashboard. All rights reserved.
+    </footer>
+    <script>
+       function showAlertAndOpenWindow(message, url) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert';
+            alertDiv.textContent = message;
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.remove();
+                window.open(url, '_blank');
+            }, 2000); // 2 seconds
+        }
+      function showMedicalPlans() {
+        showAlertAndOpenWindow("Redirecting to Medical Insurance Plans", "https://www.sbilife.co.in/");
+      }
+
+      function showAutoPlans() {
+        showAlertAndOpenWindow("Redirecting to Auto Insurance Plans...", "https://www.sbilife.co.in/");
+      }
+      
+
+      function showHomePlans() {
+        showAlertAndOpenWindow("Redirecting to Home Insurance Plans...", "https://www.sbilife.co.in/");
+      }
+      
+      function showPetPlans() {
+        showAlertAndOpenWindow("Redirecting to Pet Insurance Plans...", "https://www.sbilife.co.in/");
+      }
+      
+    </script>
+  </body>
+</html>

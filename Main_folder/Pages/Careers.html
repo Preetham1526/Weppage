@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Careers</title>
+    <link rel="stylesheet" href="Pagescss/careers.css" />
+    <!-- new shared CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Top Horizontal Dashboard Bar -->
+    <header class="top-navbar">
+      <h1 class="text-center mb-5">
+        Welcome <span id="username-display"></span>
+      </h1>
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center px-4"
+      >
+        <nav class="nav-links d-flex gap-4">
+          <a href="subscription.html"
+            ><i class="fas fa-shield-alt"></i> Subscription</a
+          >
+          <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+          <a href="discussions.html"
+            ><i class="fas fa-comments"></i> Discussions</a
+          >
+          <a href="insurance.html"
+            ><i class="fas fa-shield-heart"></i> Insurance</a
+          >
+          <a href="Careers.html"><i class="fas fa-briefcase"></i> Careers</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="../templates/home.html" class="home-link">← Home</a>
+          <button class="logout_btn" id="logoutBtn" onclick="logout()">
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content container mt-5 pt-5">
+      <!-- Job Listings -->
+      <div class="job-listings-container" id="job-listings">
+        <!-- Dynamically added jobs -->
+      </div>
+
+      <!-- Application Form -->
+      <div class="application-form" id="applicationForm" style="display: none">
+        <h2>General Application</h2>
+        <div id="application-error" class="error-message"></div>
+        <form id="application-form" enctype="multipart/form-data">
+          <div class="FL_name">
+            <input type="text" id="name" placeholder="First Name" required />
+            <input type="text" placeholder="Middle Name" />
+            <input type="text" placeholder="Last Name" required />
+          </div>
+          <input type="email" placeholder="Email" required />
+          <select id="role" required>
+            <option value="">Select Role you want to apply for</option>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="UX Designer">UX Designer</option>
+            <option value="Marketing Specialist">Marketing Specialist</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="CL_part">
+            <textarea id="coverLetter" placeholder="Cover Letter"></textarea>
+            <input type="file" id="resume" accept=".pdf,.doc,.docx" required />
+          </div>
+          <input class="submit_btn" type="submit" value="Submit Application" />
+        </form>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer class="site-footer">
+      &copy; 2025 Preetham's Dashboard. All rights reserved.
+    </footer>
+
+    <!-- Script -->
+    <script>
+      const jobs = [
+        {
+          title: "Software Engineer",
+          description:
+            "We are looking for a passionate Software Engineer to design, develop and install software solutions. Must have experience in Python, Flask, and SQL.",
+        },
+      ];
+
+      const jobListingsDiv = document.getElementById("job-listings");
+      const applicationForm = document.getElementById("applicationForm");
+
+      if (jobs.length > 0) {
+        jobs.forEach((job) => {
+          const jobDiv = document.createElement("div");
+          jobDiv.classList.add("job-listing");
+          jobDiv.innerHTML = `
+            <h3>${job.title}</h3>
+            <p>${job.description}</p>
+            <button onclick="applyForJob('${job.title}')">Apply</button>
+          `;
+          jobListingsDiv.appendChild(jobDiv);
+        });
+      } else {
+        jobListingsDiv.innerHTML = "<p>No current job openings.</p>";
+      }
+
+      function applyForJob(jobTitle) {
+        document.getElementById("role").value = jobTitle;
+        applicationForm.style.display = "block";
+      }
+
+      document
+        .getElementById("application-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value;
+          const role = document.getElementById("role").value;
+          const resume = document.getElementById("resume").files[0];
+          const errorDiv = document.getElementById("application-error");
+
+          if (!name || !role || !resume) {
+            errorDiv.textContent = "Please fill all required fields.";
+            return;
+          }
+
+          console.log("Name:", name);
+          console.log("Role:", role);
+          console.log("Resume:", resume);
+          errorDiv.textContent = "Application submitted!";
+          this.reset();
+          applicationForm.style.display = "none";
+        });
+
+      // Toggle auth button
+      const isLoggedIn = true; // Replace with actual auth logic
+      const authBtn = document.getElementById("authBtn");
+      if (isLoggedIn) {
+        authBtn.textContent = "Logout";
+        authBtn.onclick = () => alert("Logged out!");
+      } else {
+        authBtn.textContent = "Login";
+        authBtn.onclick = () => (window.location.href = "login.html");
+      }
+    </script>
+  </body>
+</html>
