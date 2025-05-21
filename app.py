@@ -36,6 +36,9 @@ def send_email(to, subject, content):
 def home():
     return render_template("home.html")
 
+
+
+
 @app.route('/login', methods=["POST"])
 def login():
     data = request.get_json()
