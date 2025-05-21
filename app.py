@@ -38,11 +38,11 @@ def home():
 
 @app.route('/appointment')
 def career():
-    return render_template('appointment.html')
+    return render_template('appointments.html')
 
 @app.route('/careers')
 def career():
-    return render_template('career.html')
+    return render_template('careers.html')
 
 @app.route('/discussion')
 def contact():
