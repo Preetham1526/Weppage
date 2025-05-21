@@ -68,8 +68,8 @@ def subscription():
 def login():
     return render_template('login.html')
 
-@app.route('/login-in', methods=["POST"])
-def login():
+@app.route('/login_in', methods=["POST"])
+def login_in():
     data = request.get_json()
     email = data["email"]
     password = data["password"]
@@ -83,13 +83,13 @@ def login():
         return redirect(url_for("home"))
     return render_template("login", error="Invalid credentials")
 
-@app.route("/logout")
-def logout():
+@app.route("/logout_out")
+def logout_out():
     session.pop("user_id", None)
     return jsonify({"message": "Logged out"})
 
-@app.route("/signup", methods=["POST"])
-def signup():
+@app.route("/signup_in", methods=["POST"])
+def signup_in():
     data = request.get_json()
     hashed = generate_password_hash(data["password"])
 
