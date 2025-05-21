@@ -37,15 +37,15 @@ def home():
     return render_template("home.html")
 
 @app.route('/appointment')
-def career():
+def appointment():
     return render_template('appointments.html')
 
 @app.route('/careers')
-def career():
+def careers():
     return render_template('careers.html')
 
 @app.route('/discussion')
-def contact():
+def discussion():
     return render_template('discussions.html')
 
 @app.route('/contact')
@@ -53,21 +53,20 @@ def contact():
     return render_template('contact.html')
 
 @app.route('/fg_password')
-def career():
+def fg_password():
     return render_template('forgot_password.html')
 
 @app.route('/insurance')
-def contact():
+def insurance():
     return render_template('insurance.html')
 
 @app.route('/subscription')
-def career():
+def subscription():
     return render_template('subscription.html')
 
 @app.route('/login')
-def contact():
+def login():
     return render_template('login.html')
-
 
 @app.route('/login', methods=["POST"])
 def login():
@@ -128,7 +127,7 @@ def verify_otp():
         row = cursor.fetchone()
 
     if row and row[0] == user_otp:
-        return redirect(f"/new-password?email={email}")
+        return redirect(f"/reset-password?email={email}")
     else:
         return "Invalid OTP"
 
