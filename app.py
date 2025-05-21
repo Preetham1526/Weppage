@@ -68,8 +68,8 @@ def subscription():
 def login():
     return render_template('login.html')
 
-@app.route('/login_in', methods=["POST"])
-def login_in():
+@app.route('/login_method', methods=["POST"])
+def login_method():
     data = request.get_json()
     email = data["email"]
     password = data["password"]
@@ -83,13 +83,13 @@ def login_in():
         return redirect(url_for("home"))
     return render_template("login", error="Invalid credentials")
 
-@app.route("/logout_out")
-def logout_out():
+@app.route("/logout_method")
+def logout_method():
     session.pop("user_id", None)
     return jsonify({"message": "Logged out"})
 
-@app.route("/signup_in", methods=["POST"])
-def signup_in():
+@app.route("/signup_method", methods=["POST"])
+def signup_method():
     data = request.get_json()
     hashed = generate_password_hash(data["password"])
 
@@ -105,8 +105,8 @@ def signup_in():
     return jsonify({"message": "Signup successful"})
 
 # ---------- Forgot/Reset Password with OTP ----------
-@app.route('/forgot-password', methods=['POST'])
-def forgot_password():
+@app.route('/forgot-password_method', methods=['POST'])
+def forgot_password_method():
     email = request.form['email']
     otp = str(random.randint(100000, 999999))
 
@@ -117,8 +117,8 @@ def forgot_password():
     send_email(email, "Password Reset OTP", f"Your OTP is: {otp}")
     return redirect('/verify-otp')
 
-@app.route('/verify-otp', methods=['POST'])
-def verify_otp():
+@app.route('/verify-ot_method', methods=['POST'])
+def verify_otp_method():
     email = request.form['email']
     user_otp = request.form['otp']
 
@@ -131,8 +131,8 @@ def verify_otp():
     else:
         return "Invalid OTP"
 
-@app.route('/reset-password', methods=['POST'])
-def reset_password():
+@app.route('/reset-password_method', methods=['POST'])
+def reset_password_method():
     email = request.args.get("email")
     new_password = request.form["new_password"]
     confirm = request.form["confirm_password"]
@@ -199,8 +199,8 @@ def view_subscriptions():
     return jsonify(orders)
 
 # ---------- Careers ----------
-@app.route("/careers", methods=["GET", "POST"])
-def careers():
+@app.route("/careers_method", methods=["GET", "POST"])
+def careers_method():
     if request.method == "POST":
         data = request.get_json()
         with sqlite3.connect("database.db") as conn:
@@ -232,8 +232,8 @@ def delete_career(id):
     return jsonify({"message": "Career deleted"})
 
 # ---------- Discussions ----------
-@app.route("/discussions", methods=["GET", "POST"])
-def discussions():
+@app.route("/discussions_method", methods=["GET", "POST"])
+def discussions_method():
     if request.method == "POST":
         data = request.get_json()
         now = datetime.datetime.utcnow().isoformat()
