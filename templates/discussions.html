@@ -59,7 +59,7 @@
     <script>
       const loggedInUser = localStorage.getItem('loggedInUser');
       if (!loggedInUser) {
-        window.location.href = '../login/login.html';
+        window.location.href = "{{ url_for('login') }}";
         }
         const appointmentIndex = localStorage.getItem('selectedAppointmentIndex');
       if (appointmentIndex === null) {
