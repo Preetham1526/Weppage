@@ -68,7 +68,7 @@ def subscription():
 def login():
     return render_template('login.html')
 
-@app.route('/login', methods=["POST"])
+@app.route('/login-in', methods=["POST"])
 def login():
     data = request.get_json()
     email = data["email"]
@@ -80,8 +80,8 @@ def login():
 
     if user and check_password_hash(user[0], password):
         session["user_id"] = email
-        return jsonify({"message": "Login successful"})
-    return jsonify({"error": "Invalid credentials"}), 401
+        return redirect(url_for("home"))
+    return render_template("login", error="Invalid credentials")
 
 @app.route("/logout")
 def logout():
