@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Documents</title>
-    <link rel="stylesheet" href="Pagescss/documents.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/documents.css') }}" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
@@ -27,8 +27,7 @@
     </ul>
 
     <!-- Home Icon Link -->
-    <a href="../templates/home.html" class="home-icon" title="Go to Home">
-      <a href= class="home-icon" title="Go to Home">
+    <a href="home.html" class="home-icon" title="Go to Home">
       <i class="fas fa-home"></i> Home
     </a>
     <footer class="site-footer">

@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Appointment Details</title>
-    <link rel="stylesheet" href="Pagescss/discussion.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/discussion.css') }}" />
     <script
       src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
@@ -48,7 +48,7 @@
           <div class="appointments-list" id="finishedAppointmentsList"></div>
         </div>
 
-      <a href="../templates/home.html" class="home-icon" title="Go to Home">
+      <a href="home.html" class="home-icon" title="Go to Home">
         <i class="fas fa-home"></i> Home
       </a>
     </div>

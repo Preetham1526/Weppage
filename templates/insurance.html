@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Insurance Options</title>
-    <link rel="stylesheet" href="Pagescss/insurance.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/insurance.css') }}" />
     
  
   
@@ -33,7 +33,7 @@
         <a href="Careers.html"><i class="fas fa-briefcase"></i> Careers</a>
       </nav>
       <div class="nav-actions">
-        <a href="../templates/home.html" class="home-link">← Home</a>
+        <a href="home.html" class="home-link">← Home</a>
         <button class="logout_btn" id="logoutBtn" onclick="logout()">
           Logout
         </button>

@@ -19,16 +19,17 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
   </head>
   <body>
     <div class="topbar">
       <h1>Welcome, <span id="username-display"></span></h1>
       <div class="auth-top d-flex flex-row gap-2" id="authTop">
-        <a href="../login/login.html" class="login-btn" id="loginBtn"
+        <a href="login.html" class="login-btn" id="loginBtn"
           >Already have an account? Login here</a
+
         >
-        <a href="../login/login.html" class="signup-btn" id="signupBtn"
+        <a href="login.html" class="signup-btn" id="signupBtn"
           >Register</a
         >
       </div>
@@ -42,22 +43,22 @@
       <aside class="sidebar">
         <h2>Dashboard</h2>
         <nav>
-          <a href="../Pages/appointments.html"
+          <a href="appointments.html"
             ><i class="fas fa-calendar-check"></i> Appointments</a
           >
-          <a href="../Pages/subscription.html"
+          <a href="subscription.html"
             ><i class="fas fa-shield-alt"></i> Subscription</a
           >
-          <a href="../Pages/contact.html"
+          <a href="contact.html"
             ><i class="fas fa-envelope"></i> Contact</a
           >
-          <a href="../Pages/discussions.html"
+          <a href="discussions.html"
             ><i class="fas fa-comments"></i> Discussions</a
           >
-          <a href="../Pages/insurance.html"
+          <a href="insurance.html"
             ><i class="fas fa-shield-heart"></i> Insurance</a
           >
-          <a href="../Pages/Careers.html"
+          <a href="Careers.html"
             ><i class="fas fa-briefcase"></i> Careers</a
           >
         </nav>

@@ -8,7 +8,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <link href="../Pages/Pagescss/subscription.css" rel="stylesheet" />
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/subscription.css') }}" />
   </head>
   <body class="bg-light">
     <header class="top-navbar">
@@ -32,7 +32,7 @@
           <a href="Careers.html"><i class="fas fa-briefcase"></i> Careers</a>
         </nav>
         <div class="nav-actions">
-          <a href="../templates/home.html" class="home-link">← Home</a>
+          <a href="home.html" class="home-link">← Home</a>
           <button class="logout_btn" id="logoutBtn" onclick="logout()">
             Logout
           </button>
