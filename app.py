@@ -36,6 +36,12 @@ def send_email(to, subject, content):
 def home():
     return render_template("home.html")
 
+@app.route("/home_login")
+def home_login():
+    if "user" not in session:
+        return redirect("/login")
+    return render_template("home.html", user=session["user"])
+
 @app.route('/appointment')
 def appointment():
     return render_template('appointments.html')
@@ -68,20 +74,27 @@ def subscription():
 def login():
     return render_template('login.html')
 
-@app.route('/login_method', methods=["POST"])
+@app.route("/login_method", methods=["POST"])
 def login_method():
     data = request.get_json()
     email = data["email"]
     password = data["password"]
 
     with sqlite3.connect("database.db") as conn:
-        cursor = conn.execute("SELECT password FROM users WHERE email = ?", (email,))
+        cursor = conn.execute("SELECT username, email, phone, country, state, password FROM users WHERE email = ?", (email,))
         user = cursor.fetchone()
 
-    if user and check_password_hash(user[0], password):
-        session["user_id"] = email
-        return redirect(url_for("home"))
-    return render_template("login", error="Invalid credentials")
+    if user and check_password_hash(user[5], password):
+        session["user"] = {
+            "username": user[0],
+            "email": user[1],
+            "phone": user[2],
+            "country": user[3],
+            "state": user[4]
+        }
+        return jsonify({"message": "Login successful"})
+    
+    return jsonify({"message": "Invalid credentials"}), 401
 
 @app.route("/logout_method")
 def logout_method():
