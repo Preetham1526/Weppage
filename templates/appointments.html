@@ -23,20 +23,27 @@
         class="container-fluid d-flex justify-content-between align-items-center px-4"
       >
         <nav class="nav-links d-flex gap-4">
-          <a href="subscription.html"
+          <a href="{{ url_for('appointment') }}"
+            ><i class="fas fa-calendar-check"></i> Appointments</a
+          >
+          <a href="{{ url_for('subscription') }}"
             ><i class="fas fa-shield-alt"></i> Subscription</a
           >
-          <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
-          <a href="discussions.html"
+          <a href="{{ url_for('contact') }}"
+            ><i class="fas fa-envelope"></i> Contact</a
+          >
+          <a href="{{ url_for('discussion') }}"
             ><i class="fas fa-comments"></i> Discussions</a
           >
-          <a href="insurance.html"
+          <a href="{{ url_for('insurance') }}"
             ><i class="fas fa-shield-heart"></i> Insurance</a
           >
-          <a href="Careers.html"><i class="fas fa-briefcase"></i> Careers</a>
+          <a href="{{ url_for('careers') }}"
+            ><i class="fas fa-briefcase"></i> Careers</a
+          >
         </nav>
         <div class="nav-actions">
-          <a href="home.html" class="home-link">← Home</a>
+          <a href="{{ url_for('home') }}" class="home-link">← Home</a>
           <button class="logout_btn" id="logoutBtn" onclick="logout()">
             Logout
           </button>

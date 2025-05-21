@@ -25,11 +25,11 @@
     <div class="topbar">
       <h1>Welcome, <span id="username-display"></span></h1>
       <div class="auth-top d-flex flex-row gap-2" id="authTop">
-        <a href="login.html" class="login-btn" id="loginBtn"
+        <a href="{{ url_for('login') }}" class="login-btn" id="loginBtn"
           >Already have an account? Login here</a
 
         >
-        <a href="login.html" class="signup-btn" id="signupBtn"
+        <a href="{{ url_for('login') }}" class="signup-btn" id="signupBtn"
           >Register</a
         >
       </div>
@@ -43,22 +43,22 @@
       <aside class="sidebar">
         <h2>Dashboard</h2>
         <nav>
-          <a href="appointments.html"
+          <a href="{{ url_for('appointment') }}"
             ><i class="fas fa-calendar-check"></i> Appointments</a
           >
-          <a href="subscription.html"
+          <a href="{{ url_for('subscription') }}"
             ><i class="fas fa-shield-alt"></i> Subscription</a
           >
-          <a href="contact.html"
+          <a href="{{ url_for('contact') }}"
             ><i class="fas fa-envelope"></i> Contact</a
           >
-          <a href="discussions.html"
+          <a href="{{ url_for('discussion') }}"
             ><i class="fas fa-comments"></i> Discussions</a
           >
-          <a href="insurance.html"
+          <a href="{{ url_for('insurance') }}"
             ><i class="fas fa-shield-heart"></i> Insurance</a
           >
-          <a href="Careers.html"
+          <a href="{{ url_for('careers') }}"
             ><i class="fas fa-briefcase"></i> Careers</a
           >
         </nav>

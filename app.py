@@ -36,7 +36,37 @@ def send_email(to, subject, content):
 def home():
     return render_template("home.html")
 
+@app.route('/appointment')
+def career():
+    return render_template('appointment.html')
 
+@app.route('/careers')
+def career():
+    return render_template('career.html')
+
+@app.route('/discussion')
+def contact():
+    return render_template('discussions.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/fg_password')
+def career():
+    return render_template('forgot_password.html')
+
+@app.route('/insurance')
+def contact():
+    return render_template('insurance.html')
+
+@app.route('/subscription')
+def career():
+    return render_template('subscription.html')
+
+@app.route('/login')
+def contact():
+    return render_template('login.html')
 
 
 @app.route('/login', methods=["POST"])
