@@ -39,10 +39,11 @@
                 placeholder="Username"
                 required
               />
-              <input type="text" placeholder="Full Name" required />
-              <input type="email" placeholder="Email" required />
-              <input type="password" placeholder="Password" required />
-              <input type="tel" id="phone" placeholder="Phone" required />
+              <input type="text" id="FullName" placeholder="Full Name" required />
+              <input type="email" id="Email" placeholder="Email" required />
+              <input type="password" id="Password" placeholder="Password" required />
+              <input type="tel" id="phone"  id="Phone" placeholder="Phone number" 
+              pattern="^\d{3}-\d{3}-\d{4}$" title="Format: 123-456-7890"/>
               <div>
                 <button type="submit">Register</button>
               </div>
@@ -83,11 +84,11 @@
   // REGISTER
   document.getElementById("signupForm").addEventListener("submit", async function (e) {
     e.preventDefault();
-    const username = document.getElementById("signupUsername").value;
-    const full_name = document.getElementById("signupFullName").value;
-    const email = document.getElementById("signupEmail").value;
-    const password = document.getElementById("signupPassword").value;
-    const phone = document.getElementById("signupPhone").value;
+    const username = document.getElementById("Username").value;
+    const full_name = document.getElementById("FullName").value;
+    const email = document.getElementById("Email").value;
+    const password = document.getElementById("Password").value;
+    const phone = document.getElementById("Phone").value;
 
     const response = await fetch("/signup_method", {
       method: "POST",

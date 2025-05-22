@@ -17,7 +17,7 @@ app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb://localhost:27017/subs
 mongo = PyMongo(app)
 
 # ---------- PostgreSQL (Render deployment) ----------
-USE_POSTGRES = os.getenv("USE_POSTGRES", "False").lower() == "true"
+USE_POSTGRES = os.getenv("dpg-d0mmolbuibrs73er6ju0-a", "False").lower() == "true"
 
 
 #USE_POSTGRES = bool(os.getenv("postgresql://webpage_postgre_user:q2xDdUb6bPsdsZYSr2MUQYm5N6K3dy3P@dpg-d0mmolbuibrs73er6ju0-a/webpage_postgre"))
@@ -69,7 +69,7 @@ def signup_method():
     email = data.get('email')
     password = data.get('password')
     phone = data.get('phone')
-    conn = get_db_connection()
+    conn = get_db_connection("users.db")
     try:
         conn.execute('INSERT INTO users (username, full_name, email, password, phone) VALUES (?, ?, ?, ?, ?)',
                      (username, full_name, email, password, phone))
@@ -86,7 +86,7 @@ def login_method():
     email = data.get('email')
     password = data.get('password')
 
-    conn = get_db_connection()
+    conn = get_db_connection("USE_POSTGRES")
     user = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password)).fetchone()
     conn.close()
 
@@ -107,7 +107,7 @@ def logout_method():
 def forgot_password_method():
     email = request.form['email']
     otp = str(random.randint(100000, 999999))
-    with get_db_conn() as conn:
+    with get_db_conn(USE_POSTGRES) as conn:
         cursor = conn.cursor()
         cursor.execute("""
             INSERT INTO otp_tokens (email, otp, created_at)
