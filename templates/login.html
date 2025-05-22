@@ -89,7 +89,7 @@
     const password = document.getElementById("signupPassword").value;
     const phone = document.getElementById("signupPhone").value;
 
-    const response = await fetch("/register", {
+    const response = await fetch("/signup_method", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, full_name, email, password, phone })
