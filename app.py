@@ -17,12 +17,19 @@ app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb://localhost:27017/subs
 mongo = PyMongo(app)
 
 # ---------- PostgreSQL (Render deployment) ----------
-USE_POSTGRES = bool(os.getenv("postgresql://webpage_postgre_user:q2xDdUb6bPsdsZYSr2MUQYm5N6K3dy3P@dpg-d0mmolbuibrs73er6ju0-a/webpage_postgre"))
+USE_POSTGRES = os.getenv("USE_POSTGRES", "False").lower() == "true"
 
-def get_db_conn():
-    if USE_POSTGRES:
-        return psycopg2.connect(os.environ["DATABASE_URL"], sslmode="require")
-    return sqlite3.connect("database.db")
+
+#USE_POSTGRES = bool(os.getenv("postgresql://webpage_postgre_user:q2xDdUb6bPsdsZYSr2MUQYm5N6K3dy3P@dpg-d0mmolbuibrs73er6ju0-a/webpage_postgre"))
+
+if not os.path.exists('users.db'):
+    import init_db
+
+def get_db_connection():
+    conn = sqlite3.connect('users.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+    
 
 # ---------- Email OTP Utility ----------
 EMAIL_USER = os.getenv("EMAIL_USER", "youremail@example.com")
@@ -57,38 +64,39 @@ def home_login():
 @app.route('/signup_method', methods=["POST"])
 def signup_method():
     data = request.get_json()
-    hashed = generate_password_hash(data["password"])
-    with get_db_conn() as conn:
-        cursor = conn.cursor()
-        try:
-            cursor.execute("""
-                INSERT INTO users (username, email, phone, country, state, password)
-                VALUES (%s, %s, %s, %s, %s, %s)
-            """ if USE_POSTGRES else """
-                INSERT INTO users (username, email, phone, country, state, password)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (data["username"], data["email"], data["phone"], data["country"], data["state"], hashed))
-            conn.commit()
-        except Exception as e:
-            return jsonify({"error": "Email already registered"}), 400
-    return jsonify({"message": "Signup successful"})
+    username = data.get('username')
+    full_name = data.get('full_name')
+    email = data.get('email')
+    password = data.get('password')
+    phone = data.get('phone')
+    conn = get_db_connection()
+    try:
+        conn.execute('INSERT INTO users (username, full_name, email, password, phone) VALUES (?, ?, ?, ?, ?)',
+                     (username, full_name, email, password, phone))
+        conn.commit()
+        return jsonify({"message": "Registration successful"}), 200
+    except sqlite3.IntegrityError:
+        return jsonify({"message": "Email already registered"}), 400
+    finally:
+        conn.close()
 
 @app.route('/login_method', methods=["POST"])
 def login_method():
     data = request.get_json()
-    email = data["email"]
-    password = data["password"]
+    email = data.get('email')
+    password = data.get('password')
 
-    with get_db_conn() as conn:
-        cursor = conn.cursor()
-        cursor.execute("""
-            SELECT username, email, phone, country, state, password FROM users WHERE email = %s
-        """ if USE_POSTGRES else """
-            SELECT username, email, phone, country, state, password FROM users WHERE email = ?
-        """, (email,))
-        user = cursor.fetchone()
+    conn = get_db_connection()
+    user = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password)).fetchone()
+    conn.close()
 
-    if user and check_password_hash(user[5], password):
+    if user:
+        session['user_id'] = user['id']
+        return jsonify({"message": "Login successful"}), 200
+    else:
+        return jsonify({"message": "Invalid credentials"}), 401
+
+   '''if user and check_password_hash(user[5], password):
         session["user"] = {
             "username": user[0],
             "email": user[1],
@@ -99,7 +107,7 @@ def login_method():
         session["user_id"] = user[1]
         return jsonify({"message": "Login successful"})
 
-    return jsonify({"message": "Invalid credentials"}), 401
+    return jsonify({"message": "Invalid credentials"}), 401'''
 
 @app.route('/logout_method')
 def logout_method():
@@ -226,4 +234,4 @@ def insurance(): return render_template('insurance.html')
 def subscription(): return render_template('subscription.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

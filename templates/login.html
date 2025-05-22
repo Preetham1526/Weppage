@@ -63,27 +63,42 @@
     document.getElementById("card").classList.toggle("flipped");
   }
 
-  document
-    .getElementById("loginForm")
-    .addEventListener("submit", async function (e) {
-      e.preventDefault();
+  // LOGIN
+  document.getElementById("loginForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
 
-      const email = document.getElementById("loginEmail").value;
-      const password = document.getElementById("loginPassword").value;
-
-      const response = await fetch("/login_method", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        window.location.href = "/home";
-      } else {
-        const error = await response.json();
-        alert(error.message || "Login failed");
-      }
+    const response = await fetch("/login_method", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
     });
+
+    const result = await response.json();
+    alert(result.message);
+    if (response.ok) window.location.href = "/home";
+  });
+
+  // REGISTER
+  document.getElementById("signupForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const username = document.getElementById("signupUsername").value;
+    const full_name = document.getElementById("signupFullName").value;
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+    const phone = document.getElementById("signupPhone").value;
+
+    const response = await fetch("/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, full_name, email, password, phone })
+    });
+
+    const result = await response.json();
+    alert(result.message);
+    if (response.ok) flipCard();
+  });
 </script>
 
   </body>

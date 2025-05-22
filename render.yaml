@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: flask-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: USE_POSTGRES
+        value: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: your-db-name
+          property: connectionString
+      - key: MONGO_URI
+        value: your_mongo_connection_uri
+      - key: EMAIL_USER
+        value: your_email
+      - key: EMAIL_PASS
+        value: your_email_password
+      - key: SECRET_KEY
+        generateValue: true
