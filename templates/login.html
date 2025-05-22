@@ -8,7 +8,7 @@
   </head>
   <body>
     <main>
-    <a href="home.html" class="home-link">← Home</a>
+    <a href="{{ url_for('home') }}" class="home-link">← Home</a>
     <div class="glow-ring-container">
       <div class="glow-ring"></div>
       <div class="flip-container">
@@ -22,7 +22,7 @@
               <input type="password" id="loginPassword" placeholder="Password" required />
               <button type="submit">Login</button>
               <div>
-                <a href="forgot_password.html" class="forgot-link">Forgot Password?</a>
+                <a href="{{ url_for('forgot_password') }}" class="forgot-link">Forgot Password?</a>
               </div>
               <a href="#" class="toggle" onclick="flipCard()">Don't have an account? Sign Up</a>
             </form>
