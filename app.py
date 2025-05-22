@@ -96,18 +96,6 @@ def login_method():
     else:
         return jsonify({"message": "Invalid credentials"}), 401
 
-   '''if user and check_password_hash(user[5], password):
-        session["user"] = {
-            "username": user[0],
-            "email": user[1],
-            "phone": user[2],
-            "country": user[3],
-            "state": user[4]
-        }
-        session["user_id"] = user[1]
-        return jsonify({"message": "Login successful"})
-
-    return jsonify({"message": "Invalid credentials"}), 401'''
 
 @app.route('/logout_method')
 def logout_method():
