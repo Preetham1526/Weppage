@@ -187,7 +187,7 @@ def reset_password_method():
         return "Passwords do not match"
 
     hashed = generate_password_hash(new_password)
-    with get_db_conn(). as conn:
+    with get_db_conn() as conn:
         cursor = conn.cursor()
         cursor.execute("""
             UPDATE users SET password = %s WHERE email = %s
