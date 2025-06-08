@@ -25,13 +25,20 @@ USE_POSTGRES = os.getenv("dpg-d0mmolbuibrs73er6ju0-a", "False").lower() == "true
 if not os.path.exists('users.db'):
     import init_db
 
-def get_db_connection():
-    conn = sqlite3.connect(host="dpg-d0mmolbuibrs73er6ju0-a",
-                                   user="webpage_postgre_user",
-                                   password="q2xDdUb6bPsdsZYSr2MUQYm5N6K3dy3P",
-                                   database="webpage_postgre")
-    conn.row_factory = sqlite3.Row
-    return conn
+
+def get_db_conn():
+    if USE_POSTGRES:
+        return psycopg2.connect(
+            host="dpg-d0mmolbuibrs73er6ju0-a",
+            database="webpage_postgre",
+            user="webpage_postgre_user",
+            password="q2xDdUb6bPsdsZYSr2MUQYm5N6K3dy3P"
+        )
+    else:
+        conn = sqlite3.connect("users.db")
+        conn.row_factory = sqlite3.Row
+        return conn
+
     
 
 # ---------- Email OTP Utility ----------
@@ -70,18 +77,28 @@ def signup_method():
     username = data.get('username')
     full_name = data.get('full_name')
     email = data.get('email')
-    password = data.get('password')
+    password = generate_password_hash(data.get('password'))  # secure
     phone = data.get('phone')
-    conn = get_db_connection()
+
+    conn = get_db_conn()
+    cursor = conn.cursor()
+
     try:
-        conn.execute('INSERT INTO users (username, full_name, email, password, phone) VALUES (?, ?, ?, ?, ?)',
-                     (username, full_name, email, password, phone))
+        cursor.execute("""
+            INSERT INTO users (username, full_name, email, password, phone)
+            VALUES (%s, %s, %s, %s, %s)
+        """ if USE_POSTGRES else """
+            INSERT INTO users (username, full_name, email, password, phone)
+            VALUES (?, ?, ?, ?, ?)
+        """, (username, full_name, email, password, phone))
         conn.commit()
         return jsonify({"message": "Registration successful"}), 200
-    except sqlite3.IntegrityError:
+    except Exception as e:
+        print(e)
         return jsonify({"message": "Email already registered"}), 400
     finally:
         conn.close()
+
 
 @app.route('/login_method', methods=["POST"])
 def login_method():
@@ -89,15 +106,25 @@ def login_method():
     email = data.get('email')
     password = data.get('password')
 
-    conn = get_db_connection()
-    user = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password)).fetchone()
+    conn = get_db_conn()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, username, full_name, password FROM users WHERE email = %s
+    """ if USE_POSTGRES else """
+        SELECT id, username, full_name, password FROM users WHERE email = ?
+    """, (email,))
+    
+    row = cursor.fetchone()
     conn.close()
 
-    if user:
-        session['user_id'] = user['id']
+    if row and check_password_hash(row[3], password):
+        session["user_id"] = row[0]
+        session["user"] = {"username": row[1], "full_name": row[2]}
         return jsonify({"message": "Login successful"}), 200
     else:
         return jsonify({"message": "Invalid credentials"}), 401
+
 
 
 @app.route('/logout_method')
@@ -152,7 +179,7 @@ def reset_password_method():
         return "Passwords do not match"
 
     hashed = generate_password_hash(new_password)
-    with get_db_conn() as conn:
+    with get_db_conn(). as conn:
         cursor = conn.cursor()
         cursor.execute("""
             UPDATE users SET password = %s WHERE email = %s

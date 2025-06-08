@@ -78,17 +78,17 @@
 
     const result = await response.json();
     alert(result.message);
-    if (response.ok) window.location.href = "/home";
+    if (response.ok) window.location.href = "/home_login";  // ✅ fixed path
   });
 
   // REGISTER
   document.getElementById("signupForm").addEventListener("submit", async function (e) {
     e.preventDefault();
-    const username = document.getElementById("Username").value;
+    const username = document.getElementById("username").value;        // ✅ lowercase 'username'
     const full_name = document.getElementById("FullName").value;
     const email = document.getElementById("Email").value;
     const password = document.getElementById("Password").value;
-    const phone = document.getElementById("Phone").value;
+    const phone = document.getElementById("phone").value;              // ✅ lowercase 'phone'
 
     const response = await fetch("/signup_method", {
       method: "POST",
@@ -97,10 +97,11 @@
     });
 
     const result = await response.json();
-      alert(result.message);
+    alert(result.message);
     if (response.ok) flipCard();
   });
 </script>
+
 
   </body>
 </html>
