@@ -71,6 +71,7 @@ def home_login():
         return redirect("/login")
     return render_template("home.html", user=session["user"])
 
+
 @app.route('/signup_method', methods=["POST"])
 def signup_method():
     data = request.get_json()
@@ -83,6 +84,17 @@ def signup_method():
     conn = get_db_conn()
     cursor = conn.cursor()
 
+    # Check if email already exists
+    cursor.execute("""
+        SELECT id FROM users WHERE email = %s
+    """ if USE_POSTGRES else """
+        SELECT id FROM users WHERE email = ?
+    """, (email,))
+    existing = cursor.fetchone()
+    if existing:
+        conn.close()
+        return jsonify({"message": "Email already registered"}), 400
+
     try:
         cursor.execute("""
             INSERT INTO users (username, full_name, email, password, phone)
@@ -94,8 +106,8 @@ def signup_method():
         conn.commit()
         return jsonify({"message": "Registration successful"}), 200
     except Exception as e:
-        print(e)
-        return jsonify({"message": "Email already registered"}), 400
+        print("Signup error:", e)
+        return jsonify({"message": "Registration failed"}), 500
     finally:
         conn.close()
 
@@ -108,23 +120,19 @@ def login_method():
 
     conn = get_db_conn()
     cursor = conn.cursor()
-
     cursor.execute("""
-        SELECT id, username, full_name, password FROM users WHERE email = %s
+        SELECT * FROM users WHERE email = %s
     """ if USE_POSTGRES else """
-        SELECT id, username, full_name, password FROM users WHERE email = ?
+        SELECT * FROM users WHERE email = ?
     """, (email,))
-    
-    row = cursor.fetchone()
+    user = cursor.fetchone()
     conn.close()
 
-    if row and check_password_hash(row[3], password):
-        session["user_id"] = row[0]
-        session["user"] = {"username": row[1], "full_name": row[2]}
+    if user and check_password_hash(user[4] if USE_POSTGRES else user["password"], password):
+        session['user_id'] = user[0] if USE_POSTGRES else user["id"]
         return jsonify({"message": "Login successful"}), 200
     else:
         return jsonify({"message": "Invalid credentials"}), 401
-
 
 
 @app.route('/logout_method')
@@ -179,7 +187,7 @@ def reset_password_method():
         return "Passwords do not match"
 
     hashed = generate_password_hash(new_password)
-    with get_db_conn() as conn:
+    with get_db_conn(). as conn:
         cursor = conn.cursor()
         cursor.execute("""
             UPDATE users SET password = %s WHERE email = %s
