@@ -106,7 +106,7 @@ def signup_method():
         """, (username, full_name, email, password, phone))
         conn.commit()
         return jsonify({"message": "Registration successful"}), 200
-       except Exception as e:
+    except Exception as e:
         traceback.print_exc()
         return jsonify({"message": "Registration failed"}), 500
     finally:
