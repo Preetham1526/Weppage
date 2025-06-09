@@ -63,6 +63,13 @@
   function flipCard() {
     document.getElementById("card").classList.toggle("flipped");
   }
+  fetch('/signup_method', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({ ...formData })
+})
+.then(res => res.json())
+.then(data => alert(data.message))
 
   // LOGIN
   document.getElementById("loginForm").addEventListener("submit", async function (e) {
