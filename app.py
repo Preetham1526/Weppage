@@ -136,7 +136,7 @@ def login_method():
         return jsonify({"message": "Invalid credentials"}), 401
 
 
-@app.route('/logout_method')
+@app.route('/logout')
 def logout_method():
     session.clear()
     return jsonify({"message": "Logged out"})
@@ -198,6 +198,36 @@ def reset_password_method():
         conn.commit()
 
     return redirect('/login')
+
+
+@app.route('/user-session')
+def user_session():
+    return jsonify({"userId": session.get("user_id")})
+
+
+@app.route('/profile/<int:user_id>')
+def profile(user_id):
+    conn = get_db_conn()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT id, username, full_name, email, phone FROM users WHERE id = %s
+    """ if USE_POSTGRES else """
+        SELECT id, username, full_name, email, phone FROM users WHERE id = ?
+    """, (user_id,))
+    user = cursor.fetchone()
+    conn.close()
+
+    if user:
+        return jsonify({
+            "id": user[0] if USE_POSTGRES else user["id"],
+            "username": user[1] if USE_POSTGRES else user["username"],
+            "fullname": user[2] if USE_POSTGRES else user["full_name"],
+            "email": user[3] if USE_POSTGRES else user["email"],
+            "phone": user[4] if USE_POSTGRES else user["phone"]
+        })
+    else:
+        return jsonify({"error": "User not found"}), 404
+
 
 # ---------- Subscription (MongoDB) ----------
 @app.route("/add_to_cart", methods=["POST"])
