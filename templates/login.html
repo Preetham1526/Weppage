@@ -63,13 +63,6 @@
   function flipCard() {
     document.getElementById("card").classList.toggle("flipped");
   }
-  fetch('/signup_method', {
-  method: 'POST',
-  headers: {'Content-Type': 'application/json'},
-  body: JSON.stringify({ ...formData })
-})
-.then(res => res.json())
-.then(data => alert(data.message))
 
   // LOGIN
   document.getElementById("loginForm").addEventListener("submit", async function (e) {
@@ -85,17 +78,17 @@
 
     const result = await response.json();
     alert(result.message);
-    if (response.ok) window.location.href = "/home_login";  // ✅ fixed path
+    if (response.ok) window.location.href = "/home_login";
   });
 
   // REGISTER
   document.getElementById("signupForm").addEventListener("submit", async function (e) {
     e.preventDefault();
-    const username = document.getElementById("username").value;        // ✅ lowercase 'username'
+    const username = document.getElementById("username").value;
     const full_name = document.getElementById("FullName").value;
-    const email = adocument.getElementById("Email").value;
+    const email = document.getElementById("Email").value;
     const password = document.getElementById("Password").value;
-    const phone = document.getElementById("phone").value;              // ✅ lowercase 'phone'
+    const phone = document.getElementById("phone").value;
 
     const response = await fetch("/signup_method", {
       method: "POST",
